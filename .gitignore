@@ -1,0 +1,26 @@
+# Python caches and local virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+
+# Reproducible PyInstaller output
+/build/
+/dist/
+
+# Local CodeGraph index
+/.codegraph/
+
+# Local environment secrets (keep example files)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Generated release packages
+/release/
+
+# Local GUI captures may contain workstation paths or customer-like demo details
+/testdata/*.png

@@ -1,0 +1,7 @@
+Packaged application started; isolated test database: <temporary test directory>/data/data.db
+PASS excel: hotkey -> list -> Locate click -> completed
+PASS wps: hotkey -> list -> Locate click -> completed
+PASS wps: capture by GUI button
+PASS restart: all three completed test records persisted
+Application-only screenshot: testdata/gui_window_verification.png (image excluded from public source)
+Temporary test directory: <temporary test directory>

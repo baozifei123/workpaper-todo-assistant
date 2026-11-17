@@ -1,0 +1,7 @@
+comtypes>=1.5.0
+openpyxl>=3.1
+
+# 测试 / 构建依赖（运行程序本身不需要）
+pytest>=8.0
+pyinstaller>=6.0
+pillow>=10.0
