@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "5c510b8f-9f9d-44c2-a396-2c5e7b95fd49",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "E:\\code\\底稿未完成管理\\.claude\\worktrees\\archify-agent-flow\\.archify\\workflow-archify-agent-flow-20261120-095754\\candidate.json",
+  "output": "E:\\code\\底稿未完成管理\\.claude\\worktrees\\archify-agent-flow\\.archify\\workflow-archify-agent-flow-20261120-095754\\archify-agent-workflow.html",
+  "specification": {
+    "sha256": "acc02b36fc91f84bc6989f62b6be5ed970b5bc63fe77b46fad1fcd4290194cb8",
+    "bytes": 5997
+  },
+  "artifact": {
+    "sha256": "dfa6b65ff6404cd25b6ce33cb1a0354263371310628c11b26d8d8f7df4c54c91",
+    "bytes": 831942
+  }
+}

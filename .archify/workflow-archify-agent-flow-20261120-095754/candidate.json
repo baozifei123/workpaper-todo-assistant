@@ -1,0 +1,167 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Archify 规划与子 Agent 执行流程",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "output": ".archify/workflow-archify-agent-flow-20261120-095754/archify-agent-workflow.html"
+  },
+  "lanes": [
+    { "id": "user", "label": "用户" },
+    { "id": "orchestrator", "label": "主 Agent：规划与编排" },
+    { "id": "parallel_agents", "label": "子 Agent：并行任务" },
+    { "id": "sequential_agents", "label": "子 Agent：依赖任务" },
+    { "id": "delivery", "label": "整合与验收" },
+    { "id": "exception", "label": "澄清与返工", "variant": "exception" }
+  ],
+  "phases": [
+    { "id": "scope", "label": "明确范围", "fromCol": 0, "toCol": 1 },
+    { "id": "planning", "label": "Archify 规划与任务拆分", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "execution", "label": "派发、整合与验收", "fromCol": 4, "toCol": 5 }
+  ],
+  "mainPath": [
+    "user_request",
+    "receive_task",
+    "scope_check",
+    "archify_plan",
+    "decompose_tasks",
+    "dependency_check",
+    "parallel_execution",
+    "integrate_results",
+    "acceptance_check",
+    "deliver"
+  ],
+  "nodes": [
+    {
+      "id": "user_request",
+      "lane": "user",
+      "col": 0,
+      "type": "external",
+      "label": "提出任务",
+      "sublabel": "目标与预期交付物",
+      "icon": "person"
+    },
+    {
+      "id": "receive_task",
+      "lane": "orchestrator",
+      "col": 0,
+      "type": "backend",
+      "label": "接收并确认范围",
+      "sublabel": "目标 / 交付物 / 约束"
+    },
+    {
+      "id": "scope_check",
+      "lane": "orchestrator",
+      "col": 1,
+      "type": "backend",
+      "label": "任务定义完整？",
+      "sublabel": "信息不足先澄清",
+      "icon": "decision"
+    },
+    {
+      "id": "clarify",
+      "lane": "exception",
+      "col": 1,
+      "type": "external",
+      "label": "向用户澄清",
+      "sublabel": "补充目标 / 约束",
+      "icon": "waiting"
+    },
+    {
+      "id": "archify_plan",
+      "lane": "orchestrator",
+      "col": 2,
+      "type": "backend",
+      "label": "用 Archify 规划",
+      "sublabel": "步骤 / 分支 / 依赖 / 验收点"
+    },
+    {
+      "id": "decompose_tasks",
+      "lane": "orchestrator",
+      "col": 3,
+      "type": "backend",
+      "label": "拆分子任务",
+      "sublabel": "明确输入、输出与边界"
+    },
+    {
+      "id": "dependency_check",
+      "lane": "orchestrator",
+      "col": 4,
+      "type": "backend",
+      "label": "判断执行关系",
+      "sublabel": "独立并行或按依赖顺序",
+      "icon": "decision"
+    },
+    {
+      "id": "parallel_execution",
+      "lane": "parallel_agents",
+      "col": 4,
+      "type": "backend",
+      "label": "并行执行",
+      "sublabel": "互不依赖的子任务",
+      "icon": "active"
+    },
+    {
+      "id": "sequential_execution",
+      "lane": "sequential_agents",
+      "col": 4,
+      "type": "backend",
+      "label": "按依赖顺序执行",
+      "sublabel": "前置任务完成后再接力",
+      "icon": "active"
+    },
+    {
+      "id": "integrate_results",
+      "lane": "orchestrator",
+      "col": 5,
+      "type": "backend",
+      "label": "汇总并整合",
+      "sublabel": "处理冲突、补齐结果"
+    },
+    {
+      "id": "acceptance_check",
+      "lane": "delivery",
+      "col": 5,
+      "type": "backend",
+      "label": "按验收点检查",
+      "sublabel": "完整 / 一致 / 可交付",
+      "icon": "decision"
+    },
+    {
+      "id": "rework",
+      "lane": "exception",
+      "col": 4,
+      "type": "backend",
+      "label": "补做或调整",
+      "sublabel": "回到拆分并重新派发",
+      "icon": "active"
+    },
+    {
+      "id": "deliver",
+      "lane": "user",
+      "col": 5,
+      "type": "external",
+      "label": "交付结果",
+      "sublabel": "附流程图与验证状态",
+      "icon": "success"
+    }
+  ],
+  "edges": [
+    { "id": "request-to-agent", "from": "user_request", "to": "receive_task", "variant": "default" },
+    { "id": "agent-to-scope-check", "from": "receive_task", "to": "scope_check", "variant": "default" },
+    { "id": "scope-unclear", "from": "scope_check", "to": "clarify", "label": "目标或约束不清", "variant": "security", "role": "branch" },
+    { "id": "clarification-return", "from": "clarify", "to": "scope_check", "label": "补充信息", "variant": "dashed", "role": "return" },
+    { "id": "scope-ready", "from": "scope_check", "to": "archify_plan", "label": "明确", "variant": "emphasis", "role": "main" },
+    { "id": "plan-to-decompose", "from": "archify_plan", "to": "decompose_tasks", "variant": "default" },
+    { "id": "decompose-to-dependency", "from": "decompose_tasks", "to": "dependency_check", "variant": "default" },
+    { "id": "independent-tasks", "from": "dependency_check", "to": "parallel_execution", "label": "互相独立", "variant": "emphasis", "role": "branch" },
+    { "id": "dependent-tasks", "from": "dependency_check", "to": "sequential_execution", "label": "存在依赖", "variant": "default", "role": "branch" },
+    { "id": "parallel-to-integrate", "from": "parallel_execution", "to": "integrate_results", "label": "结果返回", "variant": "default" },
+    { "id": "sequential-to-integrate", "from": "sequential_execution", "to": "integrate_results", "label": "全部完成", "variant": "default" },
+    { "id": "integrate-to-check", "from": "integrate_results", "to": "acceptance_check", "variant": "default" },
+    { "id": "check-passed", "from": "acceptance_check", "to": "deliver", "label": "通过", "variant": "emphasis", "role": "main" },
+    { "id": "check-failed", "from": "acceptance_check", "to": "rework", "label": "缺项或冲突", "variant": "security", "role": "error" },
+    { "id": "rework-loop", "from": "rework", "to": "decompose_tasks", "label": "调整后重派", "variant": "dashed", "role": "return" }
+  ]
+}
