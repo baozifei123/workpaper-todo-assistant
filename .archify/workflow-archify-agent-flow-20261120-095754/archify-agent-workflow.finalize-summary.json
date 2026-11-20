@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "E:\\code\\底稿未完成管理\\.claude\\worktrees\\archify-agent-flow\\.archify\\workflow-archify-agent-flow-20261120-095754\\candidate.json",
+    "sha256": "acc02b36fc91f84bc6989f62b6be5ed970b5bc63fe77b46fad1fcd4290194cb8",
+    "bytes": 5997
+  },
+  "artifact": {
+    "path": "E:\\code\\底稿未完成管理\\.claude\\worktrees\\archify-agent-flow\\.archify\\workflow-archify-agent-flow-20261120-095754\\archify-agent-workflow.html",
+    "sha256": "dfa6b65ff6404cd25b6ce33cb1a0354263371310628c11b26d8d8f7df4c54c91",
+    "bytes": 831942
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "fail"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/browser-check-runtime",
+      "severity": "error",
+      "message": "browser-check could not complete its Chrome inspection.",
+      "subject": {
+        "artifact": "E:\\code\\底稿未完成管理\\.claude\\worktrees\\archify-agent-flow\\.archify\\workflow-archify-agent-flow-20261120-095754\\archify-agent-workflow.html"
+      },
+      "evidence": {
+        "reason": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nWindows browser startup may have relaunched before connecting to the DevTools pipe. Retry from a non-elevated PowerShell opened normally, outside an elevated or compatibility-mode parent. Archify does not disable browser de-elevation or the sandbox to preserve pipe handles.\nChrome transport: Node v24.14.0, libuv 1.51.0, win32; pid=63328, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=true, ended=false, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+      },
+      "supportedFixes": [
+        "resolve the reported Chrome inspection error, then rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "E:\\code\\底稿未完成管理\\.claude\\worktrees\\archify-agent-flow\\.archify\\workflow-archify-agent-flow-20261120-095754\\archify-agent-workflow.finalize.json",
+    "summaryReceipt": "E:\\code\\底稿未完成管理\\.claude\\worktrees\\archify-agent-flow\\.archify\\workflow-archify-agent-flow-20261120-095754\\archify-agent-workflow.finalize-summary.json",
+    "browserCheckReceipt": "E:\\code\\底稿未完成管理\\.claude\\worktrees\\archify-agent-flow\\.archify\\workflow-archify-agent-flow-20261120-095754\\archify-agent-workflow.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-11-20T02:00:50.524Z",
+    "source": "network",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1870,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  }
+}
